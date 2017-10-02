@@ -10,7 +10,7 @@ import routes from './routes';
 // import createBrowserHistory from 'history/createBrowserHistory';
 // const browserHistory = createBrowserHistory();
 
-const store = configureStore();
+export const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDom.render((

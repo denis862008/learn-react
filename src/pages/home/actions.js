@@ -41,7 +41,12 @@ export function deleteTodo(todo) {
 }
 
 export function getTodos() {
-    const todos = LS.get('todos');
+    let todos = LS.get('todos');
+    // const isArray = Object.prototype.toString.call(todos) === '[object Array]';
+
+    // if(!todos || !isArray) {
+    //     todos = [];
+    // }
 
     return (dispatch) => {
         delay(4000).then(() => {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.less';
 import Input from '../../components/ui/input/index';
+import Loader from '../../components/ui/loader/index';
 import { connect } from 'react-redux';
 import { addTodo, likeTodo, deleteTodo, getTodos } from './actions';
 import classnames from 'classnames';
@@ -32,10 +33,6 @@ class HomePage extends React.Component {
     }
 
     addTodo() {
-        // const { todos } = this.props.home;
-        // const id = todos[todos.length - 1].id + 1;
-        // const name = this.state.todoName;
-
         this.props.dispatch( addTodo(this.props.home.todos, this.state.todoName));
         this.setState({ todoName: '' });
     }
@@ -70,8 +67,6 @@ class HomePage extends React.Component {
         const { todoName } = this.state;
         const { todos, error, isLoading } = this.props.home;
 
-        console.log(this.props.home)
-
         LS.set('todos', todos);
 
         return(
@@ -79,7 +74,7 @@ class HomePage extends React.Component {
                 <div className='col-xs-12'>
                     <ul>
                         {
-                            isLoading ? <span>Waiting...</span>
+                            isLoading ? <Loader />
                             : todos.length !== 0 ? todos.map(this.renderTodos)
                             : <span>Todos is empty</span>
                         }
