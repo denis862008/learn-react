@@ -28,6 +28,10 @@ class HomePage extends React.Component {
         this.props.dispatch(getTodos());
     }
 
+    componentWillUnmount() {
+        this.props.home.isLoading = true;
+    }
+
     inputOnChange(value) {
         this.setState({ todoName: value });
     }
@@ -35,6 +39,14 @@ class HomePage extends React.Component {
     addTodo() {
         this.props.dispatch( addTodo(this.props.home.todos, this.state.todoName));
         this.setState({ todoName: '' });
+    }
+
+    deleteTodo(todo) {
+        this.props.dispatch(deleteTodo(todo));
+    }
+
+    likeTodo(todo) {
+        this.props.dispatch(likeTodo(todo));
     }
 
     renderTodos(item, idx) {
@@ -53,14 +65,6 @@ class HomePage extends React.Component {
                 <button className={ btnClasses } onClick={ this.likeTodo.bind(this, item) }><i className='glyphicon glyphicon-heart' /></button>
             </li>
         );
-    }
-
-    deleteTodo(todo) {
-        this.props.dispatch(deleteTodo(todo));
-    }
-
-    likeTodo(todo) {
-        this.props.dispatch(likeTodo(todo));
     }
 
     render() {
